@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React Hello World</title>
+    <link rel="stylesheet" href="scroll.css">
+  </head>
+  <body>
+    <div id= 'content'/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    
+    <script type="text/babel">
+
+	var Image = React.createClass({
+
+  		render: function() {
+    			return (
+				<img src= {this.props.source} />
+				);
+  		}
+	});
+
+	var Images = React.createClass({
+	
+		getInitialState: function(){
+			return{
+					count: 1
+				}
+		},
+		
+		_decrementCount: function(){
+			this.setState({count: this.state.count-1});
+		},
+
+		_onScroll: function(){
+			var imgHeight = 0;
+
+			 $('img').each(function(){
+					imgHeight += $(this).height();			
+					});
+
+			if($('.Images').height() +  $('.Images').scrollTop() >= imgHeight ){
+				
+				this.setState({count: this.state.count+1});
+			}
+			
+		},
+
+		render: function(){
+
+			var imgs = [];
+			for(var i=0; i<this.state.count; i++){
+				//for testing purpose img0.jpg, img1.jpg.. named images has to be there locally
+				imgs.push(<Image key= {i} source= {'img'+i+'.jpg'} alt= 'no image' />);
+			}
+			imgs.push(<Image key= 'loading' className= 'loading' source= 'loading.gif' dec= {this._decrementCount} />);
+
+			return(
+				<div className= 'Images' onScroll= {this._onScroll} >
+					{imgs}
+				</div>
+			);
+		}
+	
+	});
+		
+	ReactDOM.render(<div><h1>HelloWorld</h1> <br/> <Images/> </div>, document.getElementById('content'));
+
+	React.create
+
+    </script>
+
+  </body>
+</html>

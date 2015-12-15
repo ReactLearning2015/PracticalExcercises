@@ -1,0 +1,16 @@
+.Images{
+height: 400px;
+overflow-y: scroll;
+}
+
+.hidden{
+
+}
+
+.visible{
+
+}
+
+img{
+display: block;
+}
